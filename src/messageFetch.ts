@@ -5,6 +5,7 @@ import { ConversationMessage } from "./types";
 interface CacheEntry {
   lastFetchTime: number;
   messages: ConversationMessage[];
+  topic?: string;
 }
 
 // Cache for display names
@@ -177,6 +178,7 @@ async function ephemeralFetchConversation(
   channelCache.set(cacheKey, {
     lastFetchTime: now,
     messages,
+    topic: channel instanceof TextChannel ? channel.topic : undefined,
   });
 
   // Clean old cache entries periodically
